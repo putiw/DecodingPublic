@@ -3,7 +3,7 @@
 <br />
 <div align="center">
 
-<h3 align="center">Identifying cortical areas that underlie the transformation from 2D retinal to 3D head-centric motion signals</h3>
+<h2 align="center">Identifying cortical areas that underlie the transformation from 2D retinal to 3D head-centric motion signals</h2>
 
   <p align="center">
    ...
@@ -53,14 +53,19 @@
 
 ### Download dataset from OpenNeuro
 
+<br />  
+
 Dataset link: [OpenNeuro](https://openneuro.org/datasets/ds004443/download)
+
 <br />   
+
 Download with *nodejs*, *S3*, or *datalad*
 ```sh
 openneuro download --draft ds004443 ds004443-download/
 aws s3 sync --no-sign-request s3://openneuro.org/ds004443 ds004443-download/
 datalad install https://github.com/OpenNeuroDatasets/ds004443.git
 ```
+
 <br />   
 
 Dataset is in BIDS format such that the folder **rawdata** contains the orginal raw NIfTI files for both anatomical and funcational files, and the folder **derivatives/fmriprep** contains files that have been processed through fMRIPrep (in T1w space and in fsaverage6 space). Read more about the output space [here](https://fmriprep.org/en/stable/spaces.html).
@@ -68,6 +73,8 @@ Dataset is in BIDS format such that the folder **rawdata** contains the orginal 
 <br />  
  
 ### Setup GitHub repositories
+
+<br />  
 
 1. Go to Github directory
   ```sh
@@ -86,15 +93,29 @@ Dataset is in BIDS format such that the folder **rawdata** contains the orginal 
 <br />       
 <!-- Pipline -->
 
+
+<br />   
+
+
 ## Pipelines
 
+<br />   
+
+
 ### *dcm2bids*
+
+<br />   
+
 
 &nbsp;&nbsp;&nbsp;&nbsp;In this step we converted data from raw DICOM images into NIfTI files and organized data in BIDS format using [*Dcm2Bids*](https://unfmontreal.github.io/Dcm2Bids/). 
 
 &nbsp;&nbsp;&nbsp;&nbsp;The output of this step is provided on OpenNeuro and is used in the proceeding steps. (The DICOM images will be provided upon request).
 
+<br />   
+
 ### *fMRIPrep*
+
+<br />   
 
 &nbsp;&nbsp;&nbsp;&nbsp;We processed raw NIfTI files (those within **rawdata** folder) using [*fMRIPrep*](https://fmriprep.org/en/stable/installation.html).
 
@@ -104,8 +125,11 @@ Dataset is in BIDS format such that the folder **rawdata** contains the orginal 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:memo: **Note:** this step also requires [freeSurfer](https://surfer.nmr.mgh.harvard.edu/fswiki/rel7downloads).
 
+<br />   
+
 ### Extract ROIs
 
+<br />   
 
 
 &nbsp;&nbsp;&nbsp;&nbsp;We extracted the region of interests (ROIs) using the [neuropythy](https://github.com/noahbenson/neuropythy) pipeline. 
@@ -124,9 +148,15 @@ docker run -ti --rm -v <path-to-SUBJECTS_DIR>:/subjects nben/neuropythy atlas --
 
 &nbsp;&nbsp;&nbsp;&nbsp;:memo: **Note:** A better way: [atlasmgz](https://github.com/WinawerLab/atlasmgz) (the paper did not use this way)
 
+<br />   
+
 ## Analysis
 
+<br />   
+
 ### TAFKAP
+
+<br />   
 
 This analysis resulted in figure 3 to 6. 
 See orginal paper [here](https://www.biorxiv.org/content/10.1101/2021.03.04.433946v1).
@@ -141,7 +171,12 @@ The code will print out the decoding accuracy for each ROI and for each subject 
 
 You can play with different ways of denoise, detrend, and estimate response amplitude in the sub-function [load_vol.m](https://github.com/putiw/DecodingPublic/blob/master/helper_functions/load_vol.m)
 
+<br />   
+
 ### Searchlight
+
+
+<br />   
 
 This analysis resulted in figure 7 and 8. 
 See orginal paper [here](https://www.biorxiv.org/content/10.1101/2021.03.04.433946v1).
@@ -153,6 +188,7 @@ The file name should contain "*space-fsaverage6_hemi-R_bold.func.gii".
 You will also need the inflate surface files in the **derivatives/freesurfer/fsaverage6/mri** folder.
 
 All of the above can be found on OpenNeuro.
+
 <br />  
 
 The output is the 81924 by 1 matrix containing one decoding accuracy value for each vertex in the fsaverage6 space. This result can be then used in further analysis. 
