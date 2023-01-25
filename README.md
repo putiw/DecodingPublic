@@ -79,11 +79,11 @@ datalad install https://github.com/OpenNeuroDatasets/ds004443.git
 
 <br />  
 
-1. Go to Github directory
+* Go to Github directory
   ```sh
   cd ~/Documents/GitHub 
   ```
-2. Clone the repositories
+* Clone the repositories
   ```sh
   git clone https://github.com/putiw/DecodingPublic.git
   git clone https://github.com/Rokers/TAFKAP.git
@@ -97,8 +97,6 @@ datalad install https://github.com/OpenNeuroDatasets/ds004443.git
 <!-- Pipline -->
 
 
-<br />   
-
 
 # Pipelines
 
@@ -110,9 +108,9 @@ datalad install https://github.com/OpenNeuroDatasets/ds004443.git
 <br />   
 
 
-&nbsp;&nbsp;&nbsp;&nbsp;In this step we converted data from raw DICOM images into NIfTI files and organized data in BIDS format using [*Dcm2Bids*](https://unfmontreal.github.io/Dcm2Bids/). 
+* In this step we converted data from raw DICOM images into NIfTI files and organized data in BIDS format using [*Dcm2Bids*](https://unfmontreal.github.io/Dcm2Bids/). 
 
-&nbsp;&nbsp;&nbsp;&nbsp;The output of this step is provided on OpenNeuro and is used in the proceeding steps. (The DICOM images will be provided upon request).
+* The output of this step is provided on OpenNeuro and is used in the proceeding steps. (The DICOM images will be provided upon request).
 
 <br />   
 
@@ -120,13 +118,13 @@ datalad install https://github.com/OpenNeuroDatasets/ds004443.git
 
 <br />   
 
-&nbsp;&nbsp;&nbsp;&nbsp;We processed raw NIfTI files (those within **rawdata** folder) using [*fMRIPrep*](https://fmriprep.org/en/stable/installation.html).
+* We processed raw NIfTI files (those within **rawdata** folder) using [*fMRIPrep*](https://fmriprep.org/en/stable/installation.html).
 
-&nbsp;&nbsp;&nbsp;&nbsp;The output of this step can be found in the **derivatives/fmriprep** folder. 
+* The output of this step can be found in the **derivatives/fmriprep** folder. 
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:memo: **Note:** specifically, we ran fmriprep with this additioanl flag: *--output-space T1w:res-native fsaverage6:den-41k*
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* :memo: **Note:** specifically, we ran fmriprep with this additioanl flag: *--output-space T1w:res-native fsaverage6:den-41k*
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:memo: **Note:** this step also requires [freeSurfer](https://surfer.nmr.mgh.harvard.edu/fswiki/rel7downloads).
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* :memo: **Note:** this step also requires [freeSurfer](https://surfer.nmr.mgh.harvard.edu/fswiki/rel7downloads).
 
 <br />   
 
@@ -135,21 +133,22 @@ datalad install https://github.com/OpenNeuroDatasets/ds004443.git
 <br />   
 
 
-&nbsp;&nbsp;&nbsp;&nbsp;We extracted the region of interests (ROIs) using the [neuropythy](https://github.com/noahbenson/neuropythy) pipeline. 
 
-&nbsp;&nbsp;&nbsp;&nbsp;* Example way of running neuropythy with [Docker](https://docs.docker.com/engine/install/).
+* We extracted the region of interests (ROIs) using the [neuropythy](https://github.com/noahbenson/neuropythy) pipeline. 
+
+* Example way of running neuropythy with [Docker](https://docs.docker.com/engine/install/).
 
 ```sh
 docker run -ti --rm -v <path-to-SUBJECTS_DIR>:/subjects nben/neuropythy atlas --verbose <subject-ID> --volume-export
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;This step generates the ROI atlas file named ***wang15_mplbl.mgz*** in **derivatives/freesurfer/sub-xxxx/mri** folder.
+* This step generates the ROI atlas file named ***wang15_mplbl.mgz*** in **derivatives/freesurfer/sub-xxxx/mri** folder.
 
-&nbsp;&nbsp;&nbsp;&nbsp;:memo: **Note:** You can find the output of this step (i.e. pre-generated the ROIs files in appropriate resolution) in **derivatives/fmriprep/sub-xxxx/ses-01/anat/rois** folder. 
+&nbsp;&nbsp;&nbsp;&nbsp; *  :memo: **Note:** You can find the output of this step (i.e. pre-generated the ROIs files in appropriate resolution) in **derivatives/fmriprep/sub-xxxx/ses-01/anat/rois** folder. 
 
-&nbsp;&nbsp;&nbsp;&nbsp;:memo: **Note:** Alternatively, you can run [extractRois.m](https://github.com/putiw/DecodingPublic/blob/master/extractRois.m) in the current repo to generate the same files.
+&nbsp;&nbsp;&nbsp;&nbsp; *  :memo: **Note:** Alternatively, you can run [extractRois.m](https://github.com/putiw/DecodingPublic/blob/master/extractRois.m) in the current repo to generate the same files.
 
-&nbsp;&nbsp;&nbsp;&nbsp;:memo: **Note:** A better way: [atlasmgz](https://github.com/WinawerLab/atlasmgz) (the paper did not use this way)
+&nbsp;&nbsp;&nbsp;&nbsp; *  :memo: **Note:** A better way: [atlasmgz](https://github.com/WinawerLab/atlasmgz) (the paper did not use this way)
 
 <br />   
 
@@ -161,18 +160,18 @@ docker run -ti --rm -v <path-to-SUBJECTS_DIR>:/subjects nben/neuropythy atlas --
 
 <br />   
 
-This analysis resulted in figure 3 to 6. 
+* This analysis resulted in figure 3 to 6. 
 See orginal paper [here](https://www.biorxiv.org/content/10.1101/2021.03.04.433946v1).
 See the code for this analysis here: [run_TAFKAP](https://github.com/putiw/DecodingPublic/blob/master/run_TAFKAP.m).
 
-The input to this code is the fmriprep processed NIfTI files in **derivatives/fmriprep/sub-xxxx/ses-xx/func** folder. 
+* The input to this code is the fmriprep processed NIfTI files in **derivatives/fmriprep/sub-xxxx/ses-xx/func** folder. 
 The file name should contain "*space-T1w_desc-preproc_bold.nii.gz".
 
-The only variable that needs user input is the *bidsDir*, which should be set to whichever the directory of the project is in.
+* The only variable that needs user input is the *bidsDir*, which should be set to whichever the directory of the project is in.
 
-The code will print out the decoding accuracy for each ROI and for each subject as the output in the command window. These stats will be enough for you to regenerate the analysis in the paper, if you wish, you can save the result in a folder in **derivatives** for visualization purpose later. 
+* The code will print out the decoding accuracy for each ROI and for each subject as the output in the command window. These stats will be enough for you to regenerate the analysis in the paper, if you wish, you can save the result in a folder in **derivatives** for visualization purpose later. 
 
-You can play with different ways of denoise, detrend, and estimate response amplitude in the sub-function [load_vol.m](https://github.com/putiw/DecodingPublic/blob/master/helper_functions/load_vol.m)
+* You can play with different ways of denoise, detrend, and estimate response amplitude in the sub-function [load_vol.m](https://github.com/putiw/DecodingPublic/blob/master/helper_functions/load_vol.m)
 
 <br />   
 
@@ -181,23 +180,21 @@ You can play with different ways of denoise, detrend, and estimate response ampl
 
 <br />   
 
-This analysis resulted in figure 7 and 8. 
+* This analysis resulted in figure 7 and 8. 
 See orginal paper [here](https://www.biorxiv.org/content/10.1101/2021.03.04.433946v1).
 See the code for this analysis here: [run_Searchlight](https://github.com/putiw/DecodingPublic/blob/master/run_Searchlight.m).
 
-The required input files to the searchlight analysis are the functional scans in fsaverage6 space in the **derivatives/fmriprep/sub-xxxx/func/** folder.
+* The required input files to the searchlight analysis are the functional scans in fsaverage6 space in the **derivatives/fmriprep/sub-xxxx/func/** folder.
 The file name should contain "*space-fsaverage6_hemi-R_bold.func.gii".
 
-You will also need the inflate surface files in the **derivatives/freesurfer/fsaverage6/mri** folder.
-
-All of the above can be found on OpenNeuro.
+* You will also need the inflate surface files in the **derivatives/freesurfer/fsaverage6/mri** folder.
 
 <br />  
 
-The output is the 81924 by 1 matrix containing one decoding accuracy value for each vertex in the fsaverage6 space. This result can be then used in further analysis. 
+* The output is the 81924 by 1 matrix containing one decoding accuracy value for each vertex in the fsaverage6 space. This result can be then used in further analysis. 
 
 
-You will need to manually define three directories. 
+* You will need to manually define three directories. 
 ```matlab
 bidsDir = '/Volumes/Vision/MRI/DecodingPublic'; % project directory containing the folder **derivatives**.
 fsDir = '/Applications/freesurfer/7.2.0'; % freesurfer directory, most likely in application folder.
@@ -205,13 +202,13 @@ gitDir = '~/Documents/GitHub'; % GitHub directory, where you installed all the r
 set_up(bidsDir,gitDir,fsDir)
 ```
 
-You can play with different ways of denoise, detrend, and estimate response amplitude in the sub-function [load_surf.m](https://github.com/putiw/DecodingPublic/blob/master/helper_functions/load_surf.m)
+* You can play with different ways of denoise, detrend, and estimate response amplitude in the sub-function [load_surf.m](https://github.com/putiw/DecodingPublic/blob/master/helper_functions/load_surf.m)
 
 <br />  
 
 ## Visualization
 
-See [plot_figures.m](https://github.com/putiw/DecodingPublic/blob/master/helper_functions/plot_figures.m)
+* See [plot_figures.m](https://github.com/putiw/DecodingPublic/blob/master/helper_functions/plot_figures.m)
 
 
 <!-- CONTACT -->
