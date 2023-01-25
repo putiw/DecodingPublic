@@ -6,7 +6,10 @@
 <h2 align="center">Identifying cortical areas that underlie the transformation from 2D retinal to 3D head-centric motion signals</h2>
 
   <p align="center">
-   ...
+  
+  [![Screen][screenshot]](https://github.com/putiw/DecodingPublic/blob/main/helper_functions/chart.png)
+  
+  
   </p>
 </div>
 
@@ -227,5 +230,5 @@ Puti Wen - pw1246@nyu.edu
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[product-screenshot]: images/screenshot.png
+[screenshot]: helper_functions/chart.png
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
