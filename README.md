@@ -14,7 +14,7 @@
 </div>
 
 <!-- TABLE OF CONTENTS -->
-<details>
+
   <summary><strong>Table of Contents</strong></summary>
   <ol>
     <li>
@@ -43,7 +43,7 @@
       <a href="#visualization">Visualization</a>
     </li>
   </ol>
-</details>
+
 
 <br />       
 
