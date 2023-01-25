@@ -49,20 +49,20 @@
 
 
 <!-- GETTING STARTED -->
-## Getting Started
+# Getting Started
 
 <br />  
 
 
-### Download dataset from OpenNeuro
+## Download dataset from OpenNeuro
 
 <br />  
 
-Dataset link: [OpenNeuro](https://openneuro.org/datasets/ds004443/download)
+* Dataset link: [OpenNeuro](https://openneuro.org/datasets/ds004443/download)
 
 <br />   
 
-Download with *nodejs*, *S3*, or *datalad*
+* Download with *nodejs*, *S3*, or *datalad*
 ```sh
 openneuro download --draft ds004443 ds004443-download/
 aws s3 sync --no-sign-request s3://openneuro.org/ds004443 ds004443-download/
@@ -71,11 +71,11 @@ datalad install https://github.com/OpenNeuroDatasets/ds004443.git
 
 <br />   
 
-Dataset is in BIDS format such that the folder **rawdata** contains the orginal raw NIfTI files for both anatomical and funcational files, and the folder **derivatives/fmriprep** contains files that have been processed through fMRIPrep (in T1w space and in fsaverage6 space). Read more about the output space [here](https://fmriprep.org/en/stable/spaces.html).
+* Dataset is in BIDS format such that the folder **rawdata** contains the orginal raw NIfTI files for both anatomical and funcational files, and the folder **derivatives/fmriprep** contains files that have been processed through fMRIPrep (in T1w space and in fsaverage6 space). Read more about the output space [here](https://fmriprep.org/en/stable/spaces.html).
  
 <br />  
  
-### Setup GitHub repositories
+## Setup GitHub repositories
 
 <br />  
 
@@ -100,12 +100,12 @@ Dataset is in BIDS format such that the folder **rawdata** contains the orginal 
 <br />   
 
 
-## Pipelines
+# Pipelines
 
 <br />   
 
 
-### *dcm2bids*
+## *dcm2bids*
 
 <br />   
 
@@ -116,7 +116,7 @@ Dataset is in BIDS format such that the folder **rawdata** contains the orginal 
 
 <br />   
 
-### *fMRIPrep*
+## *fMRIPrep*
 
 <br />   
 
@@ -130,7 +130,7 @@ Dataset is in BIDS format such that the folder **rawdata** contains the orginal 
 
 <br />   
 
-### Extract ROIs
+## Extract ROIs
 
 <br />   
 
@@ -153,11 +153,11 @@ docker run -ti --rm -v <path-to-SUBJECTS_DIR>:/subjects nben/neuropythy atlas --
 
 <br />   
 
-## Analysis
+# Analysis
 
 <br />   
 
-### TAFKAP
+## TAFKAP
 
 <br />   
 
@@ -176,7 +176,7 @@ You can play with different ways of denoise, detrend, and estimate response ampl
 
 <br />   
 
-### Searchlight
+## Searchlight
 
 
 <br />   
@@ -198,7 +198,7 @@ The output is the 81924 by 1 matrix containing one decoding accuracy value for e
 
 
 You will need to manually define three directories. 
-```
+```matlab
 bidsDir = '/Volumes/Vision/MRI/DecodingPublic'; % project directory containing the folder **derivatives**.
 fsDir = '/Applications/freesurfer/7.2.0'; % freesurfer directory, most likely in application folder.
 gitDir = '~/Documents/GitHub'; % GitHub directory, where you installed all the repositories. 
