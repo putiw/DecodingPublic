@@ -1,5 +1,16 @@
-function [dataset stim_label] = load_vol(BASE,sub,ses,run,roi,p)
-%
+function [dataset stim_label] = load_vol(dataDir,sub,ses,run,roi)
+
+% Inputs:
+%     dataDir:     Path to project folder containing the derivative folder; E.g. '/Volumes/Vision/MRI/Decoding'
+%     sub:            Subject ID; E.g. 'sub-0201'
+%     ses:            Session ID; E.g. {'01','02'}
+%     run:            Run ID; E.g. [1:10]'
+%     roi:            Region of interest labels; E.g. {'V1','V2'}
+
+% Outputs:
+%     dataset:        one cell array (trials by voxel) for each ROI
+
+
 % Load and process (detrend, normalize) data for classification
 
 % Allocate data
@@ -12,7 +23,7 @@ for whichSession = 1:numel(ses)
     
     for whichRun = 1:numel(run)
         
-        datapath = [BASE,'derivatives/fmriprep/',sub,'/ses-',ses{whichSession},'/func/', ...
+        datapath = [dataDir,'derivatives/fmriprep/',sub,'/ses-',ses{whichSession},'/func/', ...
             sub,'_ses-',ses{whichSession},'_task-3dmotion_run-',num2str(whichRun), ...
             '_space-T1w_desc-preproc_bold.nii.gz'];
         
@@ -28,7 +39,7 @@ for whichSession = 1:numel(ses)
         % Extract timecourses within the ROIs
         for whichRoi = 1:numel(roi)
             
-            roiPath = [BASE,'derivatives/fmriprep/',sub,'/ses-01/anat/rois/', ...
+            roiPath = [dataDir,'derivatives/fmriprep/',sub,'/ses-01/anat/rois/', ...
                 sub,'_space-T1w_downsampled_',roi{whichRoi},'.nii.gz'];
             
             ROI = niftiread(fullfile(roiPath));
@@ -59,15 +70,8 @@ for whichSession = 1:numel(ses)
             samples = normalize(samples); % z-score samples
             %                     % needed for TAFKAP, does not do much for classify
             %
-            % Organize as scan-based or trial-based analysis
-            switch p.sample_unit
-                case {'scan'}
-                    samples = squeeze(mean(reshape(samples,8,15,[]),2)); % average every 8th datapoint
-                case {'trial'}
-                    % do nothing, keep samples
-                otherwise
-                    error('Unknown sample unit')
-            end
+            samples = squeeze(mean(reshape(samples,8,15,[]),2)); % average every 8th datapoint
+
             
             %  samples = normalize(samples); % z-score samples
             % needed for TAFKAP, does not do much for classify

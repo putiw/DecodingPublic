@@ -19,13 +19,12 @@ end
 %% TAFKAP
 for iSub = 1:9
     for iSes = 1:2
-        ses =  session(iSes*2-1:iSes*2); % session ID
-        params = SetupTAFKAP(); % set up parameters
+        ses =  session(iSes*2-1:iSes*2); % session ID        
         
         % load data
         dataFile = fullfile(bidsDir,'derivatives/dataMat',[subject{iSub},'-ses-' session{iSes*2-1:iSes*2} '-volumn.mat']);
         if ~exist(dataFile,'file') % if cleaned .mat file doesn't exist, load from gifti file
-            [allVoxelSample,stim_label] = load_vol(bidsDir,subject{iSub},ses,run,roi,params);
+            [allVoxelSample,stim_label] = load_vol(bidsDir,subject{iSub},ses,run,roi);
             disp(['saving ' subject{iSub},'-ses-' session{iSes*2-1:iSes*2} '-volumn.mat to ' bidsDir,'/derivatives/dataMat/'])
             save(dataFile,'allVoxelSample','stim_label','roi');
         else  % load cleaned .mat file if it exists to save time
@@ -59,6 +58,7 @@ for iSub = 1:9
             switch answer
                 case 'yes' % re-analysis the data and overwrite the results
                     % Setup design (parameters)
+                    params = SetupTAFKAP(); % set up parameters
                     nScans = length(ses)*length(run); % scans per subject
                     nDirs = 8; % motion directions
                     params.stimval = stim_label;
