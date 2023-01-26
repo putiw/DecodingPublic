@@ -71,7 +71,7 @@ datalad install https://github.com/OpenNeuroDatasets/ds004443.git
 
 <br />   
 
-* Dataset is in BIDS format such that the folder **rawdata** contains the orginal raw NIfTI files for both anatomical and funcational files, and the folder **derivatives/fmriprep** contains files that have been processed through fMRIPrep (in T1w space and in fsaverage6 space).  
+* Dataset is in BIDS format such that the each subject folder **sub-0XXX** contains the orginal raw NIfTI files for both anatomical and funcational files, and the folder **derivatives/fmriprep** contains files that have been processed through fMRIPrep (in T1w space and in fsaverage6 space).  
 Read more about the output space [here](https://fmriprep.org/en/stable/spaces.html).
  
 <br />  
@@ -119,7 +119,7 @@ Read more about the output space [here](https://fmriprep.org/en/stable/spaces.ht
 
 <br />   
 
-* We processed raw NIfTI files (those within **rawdata** folder) using [*fMRIPrep*](https://fmriprep.org/en/stable/installation.html).
+* We processed raw NIfTI files (those within **sub-0XXX** folder) using [*fMRIPrep*](https://fmriprep.org/en/stable/installation.html).
 
 * The output of this step can be found in the **derivatives/fmriprep** folder. 
 
