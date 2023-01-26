@@ -25,7 +25,7 @@ end
 
 %%
 subject = {'sub-0201','sub-0202','sub-0204','sub-0205','sub-0206','sub-0228','sub-0229','sub-0248','sub-0903'};     % subject ID
-ses =   {'01','02'}; %{'03','04'}
+ses =   {'03','04'}; %{'03','04'}{'01','02'}
 run = [1:10]';
 hemi = {'L','R'};
 
@@ -45,7 +45,7 @@ for iSub = 1:9
     
     %% MATLAB Classify
     
-    nRep = 300; % bootstraps repeats
+    nRep = 1000; % bootstraps repeats
     test_n = 1; % percetange of data set as testing trials
     
     trial_n = 160;  % number of trials
