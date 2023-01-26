@@ -71,7 +71,8 @@ datalad install https://github.com/OpenNeuroDatasets/ds004443.git
 
 <br />   
 
-* Dataset is in BIDS format such that the folder **rawdata** contains the orginal raw NIfTI files for both anatomical and funcational files, and the folder **derivatives/fmriprep** contains files that have been processed through fMRIPrep (in T1w space and in fsaverage6 space). Read more about the output space [here](https://fmriprep.org/en/stable/spaces.html).
+* Dataset is in BIDS format such that the folder **rawdata** contains the orginal raw NIfTI files for both anatomical and funcational files, and the folder **derivatives/fmriprep** contains files that have been processed through fMRIPrep (in T1w space and in fsaverage6 space).  
+Read more about the output space [here](https://fmriprep.org/en/stable/spaces.html).
  
 <br />  
  
@@ -160,16 +161,16 @@ docker run -ti --rm -v <path-to-SUBJECTS_DIR>:/subjects nben/neuropythy atlas --
 
 <br />   
 
-* This analysis resulted in figure 3 to 6. 
-See orginal paper [here](https://www.biorxiv.org/content/10.1101/2021.03.04.433946v1).
+* This analysis resulted in figure 3 to 6.  
+See orginal paper [here](https://www.biorxiv.org/content/10.1101/2021.03.04.433946v1).  
 See the code for this analysis here: [run_TAFKAP](https://github.com/putiw/DecodingPublic/blob/master/run_TAFKAP.m).
 
-* The input to this code is the fmriprep processed NIfTI files in **derivatives/fmriprep/sub-xxxx/ses-xx/func** folder. 
+* The input to this code is the fmriprep processed NIfTI files in **derivatives/fmriprep/sub-xxxx/ses-xx/func** folder.  
 The file name should contain "*space-T1w_desc-preproc_bold.nii.gz".
 
 * The only variable that needs user input is the *bidsDir*, which should be set to whichever the directory of the project is in.
 
-* The code will print out the decoding accuracy for each ROI and for each subject as the output in the command window. These stats will be enough for you to regenerate the analysis in the paper, if you wish, you can save the result in a folder in **derivatives** for visualization purpose later. 
+* The code will print out the decoding accuracy for each ROI and for each subject as the output in the command window.
 
 * You can play with different ways of denoise, detrend, and estimate response amplitude in the sub-function [load_vol.m](https://github.com/putiw/DecodingPublic/blob/master/helper_functions/load_vol.m)
 
@@ -180,18 +181,18 @@ The file name should contain "*space-T1w_desc-preproc_bold.nii.gz".
 
 <br />   
 
-* This analysis resulted in figure 7 and 8. 
-See orginal paper [here](https://www.biorxiv.org/content/10.1101/2021.03.04.433946v1).
+* This analysis resulted in figure 7 and 8.  
 See the code for this analysis here: [run_Searchlight](https://github.com/putiw/DecodingPublic/blob/master/run_Searchlight.m).
 
-* The required input files to the searchlight analysis are the functional scans in fsaverage6 space in the **derivatives/fmriprep/sub-xxxx/func/** folder.
+* The required input files to the searchlight analysis are the functional scans in fsaverage6 space in the **derivatives/fmriprep/sub-xxxx/func/** folder.  
 The file name should contain "*space-fsaverage6_hemi-R_bold.func.gii".
 
 * You will also need the inflate surface files in the **derivatives/freesurfer/fsaverage6/mri** folder.
 
 <br />  
 
-* The output is the 81924 by 1 matrix containing one decoding accuracy value for each vertex in the fsaverage6 space. This result can be then used in further analysis. 
+* The output is the 81924 by 1 matrix containing one decoding accuracy value for each vertex in the fsaverage6 space.  
+This result can be then used in further analysis. 
 
 
 * You will need to manually define three directories. 
