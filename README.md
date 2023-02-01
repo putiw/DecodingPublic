@@ -119,12 +119,15 @@ Read more about the output space [here](https://fmriprep.org/en/stable/spaces.ht
 
 <br />   
 
-* We processed raw NIfTI files (those within **sub-0XXX** folder) using [*fMRIPrep*](https://fmriprep.org/en/stable/installation.html).
+* We processed raw NIfTI files (those within **sub-0XXX** folder) using [*fMRIPrep*](https://fmriprep.org/en/stable/installation.html) version: 20.2.6.
+
+<br />
+
+Using the fMRIPrep command: /usr/local/miniconda/bin/fmriprep --nprocs 14 --omp-nthreads 14 /scratch/pw1246/MRI/Decoding/rawdata /scratch/pw1246/MRI/Decoding/derivatives participant --fs-license-file /scratch/pw1246/MRI/Decoding/code/license.txt --output-space T1w:res-native fsnative:den-41k MNI152NLin2009cAsym:res-native fsaverage:den-41k --participant_label sub-0201 --skip_bids_validation -w /tmpdata/pw1246/2800748/1 --no-submm-recon
+
+<br />
 
 * The output of this step can be found in the **derivatives/fmriprep** folder. 
-
-fMRIPrep version: 20.2.6
-fMRIPrep command: /usr/local/miniconda/bin/fmriprep --nprocs 14 --omp-nthreads 14 /scratch/pw1246/MRI/Decoding/rawdata /scratch/pw1246/MRI/Decoding/derivatives participant --fs-license-file /scratch/pw1246/MRI/Decoding/code/license.txt --output-space T1w:res-native fsnative:den-41k MNI152NLin2009cAsym:res-native fsaverage:den-41k --participant_label sub-0201 --skip_bids_validation -w /tmpdata/pw1246/2800748/1 --no-submm-recon
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* :memo: **Note:** this step also requires [freeSurfer](https://surfer.nmr.mgh.harvard.edu/fswiki/rel7downloads).
 
