@@ -3,9 +3,11 @@
 clear all;clc;close all;
 restoredefaultpath;
 addpath(genpath([pwd '/helper_functions'])); % path to helper functions
-bidsDir = '~/Documents/OpenNeuro'; %'/Volumes/Vision/MRI/DecodingPublic'; % path to bids
+
+% location variables cannot have ~ in them
+bidsDir = '/Volumes/Vision/MRI/DecodingPublic'; % '/Users/rokers/Documents/OpenNeuro/ds004443-download'; % path to bids
 fsDir = '/Applications/freesurfer/7.2.0'; % path to freesurfer
-gitDir = '~/Documents/GitHub'; % path to github
+gitDir = '/Users/rokers/Documents/GitHub'; % path to github
 set_up(bidsDir,gitDir,fsDir) % set up path and dependencies
 
 %% find searchlight index
@@ -83,7 +85,7 @@ for iSub = 1:numel(subject) % looping through subjects
             question = 'Overwrite?';
             answer = questdlg(prompt, question, 'Yes','No','Stop','Yes');
             switch answer
-                case 'yes' % re-analysis the data and overwrite the results
+                case 'Yes' % re-analysis the data and overwrite the results
                     pc = zeros(nRep,num,2); % percentage correct. bootsrap repeats x vertices x 2 hemi
                     for iHemi = 1:2
                         parfor ii = 1:num
